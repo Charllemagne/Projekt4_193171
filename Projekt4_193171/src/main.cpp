@@ -30,7 +30,7 @@ LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 ULONG_PTR gdiplusToken;
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) //funkcja generująca okno
 {
     Gdiplus::GdiplusStartupInput gdiplusStartupInput;
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, nullptr);
@@ -72,7 +72,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     
     switch (msg)
     {
-        case WM_CREATE:
+        case WM_CREATE: //definicja wszystkich przycisków
         {
             hwndButton = CreateWindow(
             "BUTTON", "W",
@@ -243,7 +243,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case 6:       
                     chwyt = true;
                     break;
-                case 7:
+                case 7: //ustawienia prędkości
                     pr = 2;
                     break;
                 case 8:
@@ -252,7 +252,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case 9:
                     pr = 10;
                     break;
-                case 10:
+                case 10: //zmiana rodzajów bloków
                     typ_blokow = 1;
                     break;
                 case 11:
@@ -266,25 +266,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     typ_blokow = 4;
                     break;
                 }
-                case 14:
+                case 14: //aktywacja programu wieża
                 {
                     wieza.aktywna = true;
                     wieza.stan = 0;
                     break;
                 }
-                case 15:
+                case 15: //aktywacja programu sort
                 {
                     inicjalizuj_sort();
                     sort.aktywny = true;
                     sort.stan = 0;
-                    sort.typ_sortu = 1;
+                    sort.typ_sortu = 1; //sortowanie rosnąco
                     break;
                 }
                 case 16:
                 {
                     inicjalizuj_sort();
                     sort.aktywny = true;
-                    sort.typ_sortu = -1;
+                    sort.typ_sortu = -1; //sortowanie malejąco
                     sort.stan = 0;
                     
                     break;
@@ -304,7 +304,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             if ((dol = (SendMessage(hwndButton2, BM_GETCHECK, 0, 0) == BST_CHECKED))) dy = pr;
 
             if (wieza.aktywna)
-                aktualizujWieza(); // <<< tu dodajemy FSM
+                aktualizujWieza();
             else if (sort.aktywny)    
                 aktualizujSort();
 
